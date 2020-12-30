@@ -1,25 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+import CpuUtilizationChart from './components/CpuUtilizationChart'
+import MemoryUtilizationChart from './components/MemoryUtilizationChart'
+import PacketsSentChart from './components/PacketsSentChart'
+import MonitorChart from './components/MonitorChart'
+import DiskChart from './components/DiskChart'
+import ErrorRateChart from './components/ErrorRateChart'
+import DBResponseTimeChart from './components/DBResponseTimeChart'
+import PacketsRecievedChart from './components/PacketsRecievedChart'
+import ThroughputChart from './components/ThroughputChart'
+import ResponseTimeChart from './components/ResponseTimeChart'
+import SideBar from './components/SideBar'
+import Header from './components/Header'
+import InputHeader from './components/InputHeader'
+
+const App = () => {
+  let content
+  content = (
+    <>
+      <Header />
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+        <SideBar />
+
+        <div
+          style={{
+            flex: '1',
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          <InputHeader />
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              marginLeft: '10px',
+              marginRight: '5px',
+            }}
+          >
+            <CpuUtilizationChart />
+
+            <div>
+              <MemoryUtilizationChart />
+              <MonitorChart />
+            </div>
+
+            <div>
+              <PacketsSentChart />
+              <DiskChart />
+            </div>
+            <ResponseTimeChart />
+            <div>
+              <PacketsRecievedChart />
+              <ThroughputChart />
+            </div>
+
+            <div>
+              <ErrorRateChart />
+              <DBResponseTimeChart />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+  return (
+    <Router>
+      <div className='App'>{content}</div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
